@@ -13,7 +13,7 @@ public class JumpWithGravity : MonoBehaviour
     private CharacterController characterController;
     private Vector3 velocity;
     private Vector3 velocitySave;
-    private bool isGrounded;
+    [HideInInspector] public bool isGrounded;
     private Animator _animator;
 
     void Start()
@@ -55,7 +55,9 @@ public class JumpWithGravity : MonoBehaviour
         // Appliquer la gravité
         velocity.y += gravity * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
+        print(isGrounded + "isgrounded");
     }
+
 
     // private void OnDrawGizmos()
     // {

@@ -73,50 +73,63 @@ public class SimpleMovement : MonoBehaviour
 
     void Animation()
     {
-        //Si tu avances et que tu regardes a gauche || Si tu avances et que tu regardes a droite
-        if (Mathf.Abs(moveDirectionZ - 1f) < 0.1f && Mathf.Abs(moveDirectionX - 1f) < 0.1f || (Mathf.Abs(moveDirectionZ - 1f) < 0.1f && Mathf.Abs(moveDirectionX + 1f) < 0.1f))
+        //Si tu es en l'air 
+        if(!GetComponent<JumpWithGravity>().isGrounded)
         {
-            _animator.SetBool("IsRunningFront", true);
+            _animator.SetBool("IsRunningFront", false);
             _animator.SetBool("IsLeft", false);
             _animator.SetBool("IsRight", false);
         }
-        //Si tu recules et que tu regardes a gauche || Si tu recules et que tu regardes a droite
-        else if (Mathf.Abs(moveDirectionZ + 1f) < 0.1f && Mathf.Abs(moveDirectionX - 1f) < 0.1f || Mathf.Abs(moveDirectionZ + 1f) < 0.1f && Mathf.Abs(moveDirectionX + 1f) < 0.1f)
-        {
-            _animator.SetBool("IsRunningBack", true);
-            _animator.SetBool("IsLeft", false);
-            _animator.SetBool("IsRight", false);
-        }
+
+        //Si t'es pas en l'air
         else
         {
-
-            if (moveDirectionX == -1)
+            //Si tu avances et que tu regardes a gauche || Si tu avances et que tu regardes a droite
+            if (Mathf.Abs(moveDirectionZ - 1f) < 0.1f && Mathf.Abs(moveDirectionX - 1f) < 0.1f || (Mathf.Abs(moveDirectionZ - 1f) < 0.1f && Mathf.Abs(moveDirectionX + 1f) < 0.1f))
             {
-
-                _animator.SetBool("IsLeft", true);
-            }
-            else if (moveDirectionX == 1)
-                _animator.SetBool("IsRight", true);
-            else
-            {
+                _animator.SetBool("IsRunningFront", true);
                 _animator.SetBool("IsLeft", false);
                 _animator.SetBool("IsRight", false);
             }
-
-            if (moveDirectionZ == -1)
+            //Si tu recules et que tu regardes a gauche || Si tu recules et que tu regardes a droite
+            else if (Mathf.Abs(moveDirectionZ + 1f) < 0.1f && Mathf.Abs(moveDirectionX - 1f) < 0.1f || Mathf.Abs(moveDirectionZ + 1f) < 0.1f && Mathf.Abs(moveDirectionX + 1f) < 0.1f)
             {
                 _animator.SetBool("IsRunningBack", true);
+                _animator.SetBool("IsLeft", false);
+                _animator.SetBool("IsRight", false);
             }
-            else if (moveDirectionZ == 1)
-                _animator.SetBool("IsRunningFront", true);
             else
             {
-                _animator.SetBool("IsRunningBack", false);
-                _animator.SetBool("IsRunningFront", false);
+
+                if (moveDirectionX == -1)
+                {
+
+                    _animator.SetBool("IsLeft", true);
+                }
+                else if (moveDirectionX == 1)
+                    _animator.SetBool("IsRight", true);
+                else
+                {
+                    _animator.SetBool("IsLeft", false);
+                    _animator.SetBool("IsRight", false);
+                }
+
+                if (moveDirectionZ == -1)
+                {
+                    _animator.SetBool("IsRunningBack", true);
+                }
+                else if (moveDirectionZ == 1)
+                    _animator.SetBool("IsRunningFront", true);
+                else
+                {
+                    _animator.SetBool("IsRunningBack", false);
+                    _animator.SetBool("IsRunningFront", false);
+                }
             }
+
         }
 
 
-        
+
     }
 }
