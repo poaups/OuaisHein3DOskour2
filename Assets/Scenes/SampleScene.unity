@@ -331,6 +331,7 @@ GameObject:
   - component: {fileID: 297969706}
   - component: {fileID: 297969711}
   - component: {fileID: 297969712}
+  - component: {fileID: 297969713}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -504,6 +505,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maprefab: {fileID: 2281340406952567727, guid: 39bb6d40446984d408960164af7cd39d, type: 3}
+--- !u!114 &297969713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297969699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 493fe429de70d2e449b69fe8cc2ef2ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Balle: {fileID: 5433815474553176705, guid: cc024421a089efb43900c03fdcd63052, type: 3}
+  distanceDevantPlayer: 1
 --- !u!1 &315136081
 GameObject:
   m_ObjectHideFlags: 0
