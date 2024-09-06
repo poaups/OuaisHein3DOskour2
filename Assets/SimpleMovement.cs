@@ -7,14 +7,24 @@ using UnityEngine.EventSystems;
 public class SimpleMovement : MonoBehaviour
 {
     //Besoin d'un character controller, ce script fonctionne avec "OrientationSouris" pour bouger la cam avec la souris
-    public float moveSpeed = 5f;
+    public float moveSpeed;
     private CharacterController characterController; 
     private Animator _animator;
 
     float moveDirectionX;
     float moveDirectionZ;
+
+    [HideInInspector] public float movespedLimitUp;
+    [HideInInspector] public float movespedLimitDown;
+    [HideInInspector] public float _moveSpeedSave;
+    private void Awake()
+    {
+        
+    }
+
     void Start()
     {
+        LimiteDeVitesse();
         _animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
     }
@@ -24,51 +34,17 @@ public class SimpleMovement : MonoBehaviour
         //Q oressé = -1, D pressé = 1
         moveDirectionX = Input.GetAxis("Horizontal"); 
         moveDirectionZ = Input.GetAxis("Vertical");
+        
+        SpressedSpeed();
         Animation();
+        InputExplication();
 
+        //Explication
         //transform.right = (1,0,0) si moveDirectionX = -1, transform.right * moveDirectionX = (1,0,0) * -1  = (-1,0,0) <- vecteur horizal,
         //transform.forward * moveDirectionZ = (0,0,1) * 1 = (0,0,1) <- vecteur vertical =  (-1,0,0) + (0,0,1) = (-1,0,1) <- addiction des 2 vectuers
-        if (moveDirectionZ == -1)
-        {
-            moveDirectionZ /= 2;
-        }
-            
+
         Vector3 move = transform.right * moveDirectionX /2 + transform.forward * moveDirectionZ;
-
-        //Ca fait la diffenrec entre moveDirectionZ et 1f avec une tolerence de 0.1f
-        if (Mathf.Abs(moveDirectionZ + 1f) < 0.1f)
-        {
-            print("moveDirectionZ -1");
-            //S
-        }
-
-        if (Mathf.Abs(moveDirectionZ - 1f) < 0.1f && Mathf.Abs(moveDirectionX - 1f) < 0.1f || Mathf.Abs(moveDirectionX + 1f) < 0.1f)
-        {
-            print("Z D Q ");
-            //S
-        } 
-        if (Mathf.Abs(moveDirectionZ - 1f) < 0.1f)
-        {
-            print("moveDirectionZ 1");
-            //Z
-        }
-        if (Mathf.Abs(moveDirectionX + 1f) < 0.1f)
-        {
-            print("moveDirectionX -1");
-            //Q
-        }
-        if (Mathf.Abs(moveDirectionX - 1f) < 0.1f)
-        {
-            print("moveDirectionX 1");
-            //D
-        }
-
-        if (moveDirectionZ == -1 && moveDirectionX == -1)
-        {
-            print("2 touches");
-        }
-
-            characterController.Move(move * moveSpeed * Time.deltaTime);
+        characterController.Move(move * moveSpeed * Time.deltaTime);
     }
 
     void Animation()
@@ -131,5 +107,63 @@ public class SimpleMovement : MonoBehaviour
 
 
 
+    }
+
+    void SpressedSpeed()
+    {
+        // Aller moins vite avec S
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            moveSpeed = moveSpeed * 0.5f;
+            print("S");
+        }
+
+        if (Input.GetKeyUp(KeyCode.S))
+        {
+            moveSpeed = _moveSpeedSave;
+        }
+    }
+    void InputExplication()
+    {
+        // QUEL TOUCH EST PRESSE DECOMMENTER POUR SAVOIR ZQSD
+        //Ca fait la diffenrec entre moveDirectionZ et 1f avec une tolerence de 0.1f
+        //if (Mathf.Abs(moveDirectionZ + 1f) < 0.1f)
+        //{
+        //    print("moveDirectionZ -1");
+        //    //S
+        //}
+
+        //if (Mathf.Abs(moveDirectionZ - 1f) < 0.1f && Mathf.Abs(moveDirectionX - 1f) < 0.1f || Mathf.Abs(moveDirectionX + 1f) < 0.1f)
+        //{
+        //    print("Z D Q ");
+        //    //S
+        //} 
+        //if (Mathf.Abs(moveDirectionZ - 1f) < 0.1f)
+        //{
+        //    print("moveDirectionZ 1");
+        //    //Z
+        //}
+        //if (Mathf.Abs(moveDirectionX + 1f) < 0.1f)
+        //{
+        //    print("moveDirectionX -1");
+        //    //Q
+        //}
+        //if (Mathf.Abs(moveDirectionX - 1f) < 0.1f)
+        //{
+        //    print("moveDirectionX 1");
+        //    //D
+        //}
+
+        //if (moveDirectionZ == -1 && moveDirectionX == -1)
+        //{
+        //    print("2 touches");
+        //}
+    }
+
+   void  LimiteDeVitesse()
+    {
+        movespedLimitUp = moveSpeed * 1.3f;
+        movespedLimitDown = moveSpeed * 0.7f;
+        _moveSpeedSave = moveSpeed;
     }
 }
