@@ -10,6 +10,7 @@ public class Spyke : MonoBehaviour
     public float Timer;
     public GameObject SpykeToPlant;
     public float zOffset = 10f;
+    public GameObject ExplosionSpyke;
 
     public Timer timer;  // Référence vers le script Timer
 
@@ -21,6 +22,7 @@ public class Spyke : MonoBehaviour
 
     void Update()
     {
+       
         if (Input.GetKeyDown(KeyCode.O))
         {
             ChargementSpyke.gameObject.SetActive(true);
@@ -50,9 +52,24 @@ public class Spyke : MonoBehaviour
         Vector3 spawnPosition = transform.position + transform.forward * zOffset;
         Instantiate(SpykeToPlant, spawnPosition, Quaternion.identity);
         timer.isTimerRunning = true;
+        timer.gameObject.SetActive(true);
 
         ChargementSpyke.value = 0;
         ChargementSpyke.gameObject.SetActive(false);
         
+    }
+
+    public void MacronExplosion()
+    {
+        var test = GameObject.Find("Spyke(Clone)");
+        Instantiate(ExplosionSpyke, test.transform.position,Quaternion.identity);;
+    }
+    void OnTriggerEnter(Collider collision)
+    {
+        print(collision + "colision");
+        if (collision.gameObject.name == "ExplosionSyke(Clone)")
+        {
+            print("mort");
+        }
     }
 }
