@@ -11,11 +11,14 @@ public class Spyke : MonoBehaviour
     public GameObject SpykeToPlant;
     public float zOffset = 10f;
     public GameObject ExplosionSpyke;
+    public Image MortImage;
+    public GameObject PrefabMort;
 
     public Timer timer;  // Référence vers le script Timer
 
     void Start()
     {
+        Instantiate(PrefabMort);
         ChargementSpyke.gameObject.SetActive(false);
         ChargementSpyke.value = 0;
     }
@@ -70,6 +73,7 @@ public class Spyke : MonoBehaviour
         if (collision.gameObject.name == "ExplosionSyke(Clone)")
         {
             print("mort");
+            MortImage.enabled = true;
         }
     }
 }
