@@ -77,4 +77,10 @@ public class Tire : MonoBehaviour
         tempColor.a = alphaValue; 
         uiImage.color = tempColor;
     }
+
+    public void DisableWeapons()
+    {
+        Phantom.SetActive(false);
+        Knife.SetActive(false);
+    }
 }

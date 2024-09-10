@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,9 +9,9 @@ public class SimpleMovement : MonoBehaviour
 {
     //Besoin d'un character controller, ce script fonctionne avec "OrientationSouris" pour bouger la cam avec la souris
     public float moveSpeed;
+    [HideInInspector] public bool CanMove = true;
     private CharacterController characterController; 
     private Animator _animator;
-
     float moveDirectionX;
     float moveDirectionZ;
 
@@ -36,7 +37,7 @@ public class SimpleMovement : MonoBehaviour
         moveDirectionZ = Input.GetAxis("Vertical");
         
         SpressedSpeed();
-        Animation();
+        AnimationMovement();
         InputExplication();
 
         //Explication
@@ -44,10 +45,14 @@ public class SimpleMovement : MonoBehaviour
         //transform.forward * moveDirectionZ = (0,0,1) * 1 = (0,0,1) <- vecteur vertical =  (-1,0,0) + (0,0,1) = (-1,0,1) <- addiction des 2 vectuers
 
         Vector3 move = transform.right * moveDirectionX /2 + transform.forward * moveDirectionZ;
-        characterController.Move(move * moveSpeed * Time.deltaTime);
+        if(CanMove)
+        {
+            characterController.Move(move * moveSpeed * Time.deltaTime);
+        }
+        
     }
 
-    void Animation()
+    void AnimationMovement()
     {
         //Si tu es en l'air 
         if(!GetComponent<JumpWithGravity>().isGrounded)
@@ -104,6 +109,8 @@ public class SimpleMovement : MonoBehaviour
             }
 
         }
+
+       
 
 
 
