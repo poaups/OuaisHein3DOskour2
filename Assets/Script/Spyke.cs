@@ -72,6 +72,8 @@ public class Spyke : MonoBehaviour
         print(collision + "colision");
         if (collision.gameObject.name == "ExplosionSyke(Clone)")
         {
+            var _deathScript = GetComponent<Death>();
+            _deathScript.IsDeath = true;
             print("mort");
             MortImage.enabled = true;
         }
