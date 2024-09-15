@@ -122,7 +122,7 @@ public class SimpleMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S))
         {
             moveSpeed = moveSpeed * 0.5f;
-            print("S");
+            //print("S");
         }
 
         if (Input.GetKeyUp(KeyCode.S))

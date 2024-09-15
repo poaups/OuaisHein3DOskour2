@@ -55,7 +55,7 @@ public class JumpWithGravity : MonoBehaviour
         // Appliquer la gravité
         velocity.y += gravity * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
-        print(isGrounded + "isgrounded");
+        //print(isGrounded + "isgrounded");
     }
 
 
