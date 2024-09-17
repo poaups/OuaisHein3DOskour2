@@ -8,11 +8,12 @@ public class ButtonDigiPad : MonoBehaviour
 {
     [Header("Parametre")]
     public GameObject Manager;
-    public GameObject _text3d;
+   
 
     public int Number;
     private float _timeButton;
     private float _DeplacementRange;
+    private GameObject _text3d;
 
     [Header("Type de bouton")]
     public bool Reset;

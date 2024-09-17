@@ -9,6 +9,7 @@ public class Tire : MonoBehaviour
     public GameObject Balle;
     public GameObject Knife;
     public GameObject Phantom;
+    public GameObject SpawnBalle;
 
     [Header("Ui")]
     public Image KnifeUi;
@@ -38,9 +39,9 @@ public class Tire : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0) && Phantom.activeSelf == true)
         {
             // Calculer la position devant le joueur
-            Vector3 _pos = new Vector3(transform.position.x + 0.30f, transform.position.y + 1.75f, transform.position.z);
-            Vector3 positionDevantPlayer = _pos + transform.forward * distanceDevantPlayer;
-            Instantiate(Balle, positionDevantPlayer, transform.rotation);
+            //Vector3 _pos = new Vector3(transform.position.x + 0.30f, transform.position.y + 1.75f, transform.position.z);
+            //Vector3 positionDevantPlayer = _pos + transform.forward * distanceDevantPlayer;
+            Instantiate(Balle, SpawnBalle.transform.position, transform.rotation);
         }
 
         // Si la molette de la souris est tournée vers le haut
